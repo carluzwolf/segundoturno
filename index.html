@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Apuração ao vivo | Billie Global BR</title>
+<meta name="description" content="Acompanhe a apuração do 2º turno com a Billie Global BR. Os números do TSE aparecem sozinhos, com Lula 13 em primeiro.">
+<meta property="og:title" content="Apuração ao vivo | Billie Global BR">
+<meta property="og:description" content="Dia 25 de outubro, a partir das 17h: acompanhe a apuração do 2º turno com a Billie Global BR.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#c1121f">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2222%22 fill=%22%23c1121f%22/><text x=%2250%22 y=%2271%22 font-size=%2262%22 text-anchor=%22middle%22 fill=%22white%22 font-family=%22Arial Black,Arial%22 font-weight=%22900%22>13</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://resultados.tse.jus.br" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --red:#c1121f; --red-bright:#e01e2d; --red-deep:#7d0a13; --red-ink:#4a050b;
+  --white:#fff; --line:rgba(193,18,31,.22);
+  --wa:#1faa59; --wa-dark:#168a47;
+  --font:"Bricolage Grotesque","Helvetica Neue",Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{font-family:var(--font);background:var(--red);color:#fff;line-height:1.5;-webkit-font-smoothing:antialiased;padding-bottom:84px;min-height:100vh}
+body.sim{padding-top:46px}
+a{color:inherit}
+button{font:inherit;color:inherit}
+:focus-visible{outline:3px solid #ffd9dc;outline-offset:3px}
+.light :focus-visible{outline-color:var(--red)}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+.btn{display:inline-flex;align-items:center;gap:10px;font-weight:800;border:0;border-radius:999px;padding:14px 24px;cursor:pointer;text-decoration:none;font-size:1rem;transition:transform .15s}
+.btn:active{transform:scale(.97)}
+.btn-white{background:#fff;color:var(--red)}
+.btn-ghost{background:transparent;border:2px solid #fff;color:#fff}
+.btn-wa{background:var(--wa);color:#fff}
+.btn-wa:hover{background:var(--wa-dark)}
+.btn svg{width:22px;height:22px;flex:none}
+
+/* aviso de teste */
+.simbar{position:fixed;top:0;left:0;right:0;z-index:100;background:#fff;color:var(--red-ink);font-weight:800;text-align:center;padding:10px 14px;border-bottom:3px solid var(--red-ink);font-size:.95rem}
+body.sim::after{content:"SIMULAÇÃO";position:fixed;inset:0;display:grid;place-items:center;font-weight:800;font-size:19vw;letter-spacing:-.04em;color:rgba(255,255,255,.1);transform:rotate(-16deg);pointer-events:none;z-index:60}
+
+/* topo */
+.hero{padding:6px 0 56px;background:radial-gradient(circle at 20% 0%,#d8202e 0%,var(--red) 50%,var(--red-deep) 130%)}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px 0}
+.brand{font-weight:800;font-size:1.05rem;border:2px solid #fff;border-radius:999px;padding:6px 14px}
+.top-right{display:flex;align-items:center;gap:12px}
+.chip{display:inline-flex;align-items:center;gap:8px;background:#fff;color:var(--red);border-radius:999px;padding:6px 14px;font-weight:800;font-size:.92rem}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--red)}
+.chip.live .dot{animation:pulse 1.3s infinite}
+@keyframes pulse{50%{opacity:.25;transform:scale(.65)}}
+.star{width:32px;height:32px;flex:none}
+
+/* antes da apuração */
+.pre-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:30px;align-items:center;padding-top:10px}
+.count-label{font-weight:600;margin-bottom:10px}
+.count{display:inline-flex;gap:10px}
+.count div{background:#fff;color:var(--red);border-radius:16px;padding:10px 14px;min-width:72px;text-align:center}
+.count b{display:block;font-size:2.1rem;line-height:1;font-weight:800;font-variant-numeric:tabular-nums}
+.count span{font-size:.78rem;font-weight:600}
+.pre h1{font-weight:800;font-size:clamp(2.4rem,6.4vw,4.6rem);line-height:.98;letter-spacing:-.035em;margin:22px 0 16px}
+.pre p.txt{font-size:1.15rem;max-width:44ch;margin-bottom:26px}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px}
+.big13{font-weight:800;font-size:clamp(11rem,34vw,24rem);line-height:.78;letter-spacing:-.07em;text-align:center;user-select:none;text-shadow:10px 10px 0 var(--red-deep)}
+
+/* apuração */
+.live-head{padding:6px 0 18px}
+.live-title{font-weight:800;font-size:clamp(2rem,5.4vw,3.4rem);line-height:1;letter-spacing:-.03em;margin-bottom:8px}
+.status{font-size:1.05rem;max-width:60ch}
+.verdict{margin:6px 0 16px;background:#fff;color:var(--red-ink);border-radius:22px;padding:16px 20px;font-weight:800;font-size:1.15rem}
+.verdict.lula{color:var(--red)}
+
+.board{display:grid;gap:12px}
+.cand{border-radius:28px;display:grid;gap:4px 20px;align-items:center}
+.cand.lula{background:#fff;color:var(--red-ink);padding:24px;grid-template-columns:auto 1fr auto;grid-template-areas:"photo who flip" "photo pct flip"}
+.cand.flavio{background:var(--red-deep);color:#fff;padding:18px 22px;grid-template-columns:auto 1fr;grid-template-areas:"photo who" "photo pct"}
+.lula.leader{box-shadow:0 0 0 5px #ffd9dc}
+.flavio.leader{box-shadow:0 0 0 4px rgba(255,255,255,.55)}
+.photo{grid-area:photo;position:relative;border-radius:18px;overflow:hidden;background:var(--red-deep);aspect-ratio:3/4}
+.lula .photo{width:clamp(96px,19vw,170px)}
+.flavio .photo{width:clamp(72px,11vw,96px)}
+.photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.photo.noimg img{display:none}
+.ph-fallback{position:absolute;inset:0;display:grid;place-content:center;justify-items:center;gap:4px;background:var(--red);color:#fff}
+.photo:not(.noimg) .ph-fallback{display:none}
+.ph-fallback svg{width:34%;height:auto}
+.ph-fallback b{font-weight:800;font-size:2.4rem;line-height:1}
+.flavio .ph-fallback{background:#a30f1b}
+.flavio .ph-fallback b{font-size:1.6rem}
+.who{grid-area:who;display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px}
+.who h2{font-weight:800;font-size:clamp(1.8rem,4.2vw,2.8rem);line-height:1;letter-spacing:-.03em}
+.flavio .who h2{font-size:clamp(1.3rem,3vw,1.8rem)}
+.party{flex-basis:100%;font-size:.9rem;opacity:.8}
+.digits{display:inline-flex;gap:4px}
+.digits span{display:grid;place-items:center;width:30px;height:38px;border:2px solid currentColor;border-radius:8px;font-weight:800;font-size:1.3rem}
+.flavio .digits span{width:24px;height:30px;font-size:1.05rem}
+.lead-tag{background:var(--red);color:#fff;border-radius:999px;padding:3px 12px;font-size:.8rem;font-weight:800}
+.flavio .lead-tag{background:#fff;color:var(--red-ink)}
+.pctbox{grid-area:pct}
+.pct{font-weight:800;font-size:clamp(3rem,10.5vw,6.8rem);line-height:.92;letter-spacing:-.045em;font-variant-numeric:tabular-nums}
+.lula .pct{color:var(--red)}
+.flavio .pct{font-size:clamp(2rem,6vw,3.2rem)}
+.votes{font-size:.95rem;font-variant-numeric:tabular-nums;opacity:.85}
+.flip{grid-area:flip;background:var(--red);color:#fff;border-radius:22px;padding:16px 18px;max-width:260px;display:grid;gap:3px}
+.flip.ahead{background:var(--red-ink)}
+.flip b{font-size:1.3rem;line-height:1.12;font-weight:800}
+.flip span{font-size:.9rem;opacity:.92;font-variant-numeric:tabular-nums}
+.replay{margin-top:8px;background:#fff;color:var(--red);border:0;border-radius:999px;padding:7px 14px;font-weight:800;cursor:pointer;font-size:.85rem}
+
+.split{position:relative;display:flex;height:20px;border-radius:999px;overflow:hidden;background:rgba(0,0,0,.25)}
+.split i{display:block;height:100%;transition:flex-basis .9s cubic-bezier(.2,.8,.2,1)}
+.split .sl{background:#fff;flex-basis:50%}
+.split .sf{background:var(--red-ink);flex:1}
+.split .mid{position:absolute;left:50%;top:0;bottom:0;width:3px;margin-left:-1.5px;background:var(--red-bright)}
+
+.progress{margin-top:20px}
+.pbar{height:14px;border-radius:999px;background:rgba(0,0,0,.25);overflow:hidden}
+.pbar i{display:block;height:100%;width:0;background:#fff;border-radius:999px;transition:width .9s cubic-bezier(.2,.8,.2,1)}
+.progress p{margin-top:8px;font-size:.98rem}
+.extras{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-top:16px}
+.tile{background:rgba(0,0,0,.2);border-radius:18px;padding:12px 14px}
+.tile b{display:block;font-size:1.2rem;font-weight:800;font-variant-numeric:tabular-nums}
+.tile span{font-size:.82rem;opacity:.88}
+.net{margin-top:14px;background:rgba(0,0,0,.28);border-radius:14px;padding:10px 14px;font-size:.92rem}
+.net a{font-weight:800}
+
+/* sobre */
+.light{background:#fff;color:var(--red-ink);padding:64px 0}
+.light h2{color:var(--red);font-weight:800;font-size:clamp(1.9rem,5vw,2.8rem);line-height:1.05;letter-spacing:-.02em;margin-bottom:14px}
+.light p{max-width:60ch;margin-bottom:12px;font-size:1.05rem}
+.join{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
+footer{background:var(--red-ink);padding:34px 0 40px;font-size:.88rem}
+footer p{max-width:78ch;margin-bottom:10px;opacity:.92}
+footer a{font-weight:600}
+
+/* comemoração */
+.burst{position:fixed;inset:0;z-index:80;background:rgba(125,10,19,.92);display:grid;place-items:center;padding:24px;text-align:center}
+.burst-card{position:relative;display:grid;justify-items:center;gap:18px;max-width:900px}
+.burst-13{position:absolute;inset:0;display:grid;place-items:center;font-weight:800;font-size:clamp(9rem,40vw,24rem);line-height:.8;letter-spacing:-.07em;color:rgba(255,255,255,.14);user-select:none}
+.burst h2{position:relative;font-weight:800;font-size:clamp(3.6rem,16vw,11rem);line-height:.9;letter-spacing:-.05em;text-shadow:6px 6px 0 var(--red-ink);transform:rotate(-3deg);animation:pop .7s cubic-bezier(.2,1.4,.4,1) both}
+@keyframes pop{0%{transform:scale(.3) rotate(-8deg);opacity:0}100%{transform:scale(1) rotate(-3deg);opacity:1}}
+.burst p{position:relative;font-size:1.15rem;max-width:34ch}
+.burst .btn{position:relative}
+#confetti{position:fixed;inset:0;z-index:90;pointer-events:none}
+
+.dock{position:fixed;left:0;right:0;bottom:0;z-index:20;background:#fff;box-shadow:0 -6px 24px rgba(74,5,11,.35);padding:10px 14px calc(10px + env(safe-area-inset-bottom,0px));display:flex;gap:10px;justify-content:center}
+.dock .btn{padding:12px 18px;font-size:.95rem;flex:1;max-width:260px;justify-content:center}
+.toast{position:fixed;left:50%;bottom:96px;transform:translateX(-50%) translateY(20px);background:var(--red-ink);color:#fff;padding:12px 20px;border-radius:999px;font-weight:600;opacity:0;pointer-events:none;transition:.25s;z-index:30;max-width:90vw;text-align:center}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+@media (max-width:820px){
+  .pre-grid{grid-template-columns:1fr}
+  .big13{font-size:min(54vw,15rem);text-align:left;order:-1}
+  .cand.lula{grid-template-columns:auto 1fr;grid-template-areas:"photo who" "pct pct" "flip flip";padding:20px}
+  .cand.flavio{grid-template-columns:auto 1fr;grid-template-areas:"photo who" "pct pct";padding:16px 18px}
+  .flip{max-width:none}
+  .pctbox{margin-top:6px}
+}
+@media (max-width:420px){
+  .wrap{padding:0 16px}
+  .chip{font-size:.82rem;padding:5px 10px}
+  .brand{font-size:.95rem}
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-star" viewBox="0 0 24 24"><path fill="currentColor" d="M12 1.8l2.9 6.6 7.1.7-5.4 4.7 1.6 7-6.2-3.7-6.2 3.7 1.6-7L2 9.1l7.1-.7z"/></symbol>
+  <symbol id="i-wa" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M12 2a10 10 0 00-8.6 15.1L2 22l5-1.3A10 10 0 1012 2zm0 18.2c-1.5 0-3-.4-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1112 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1-1.6-.8-2.6-1.4-3.6-3.1-.3-.5.3-.5.8-1.5.1-.2 0-.3 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.8.8-1.1 1.8-.9 2.8.3 1.1.9 2.1 1.6 2.9 1.3 1.5 2.9 2.6 4.8 3.2 1 .3 1.6.3 2.2.2.7-.1 1.5-.6 1.8-1.2.2-.6.2-1.1.1-1.2-.1-.2-.3-.2-.5-.3z"/></symbol>
+</svg>
+
+<div class="simbar" id="simbar" hidden>Modo de teste: os números desta página são fictícios e não são o resultado da eleição.</div>
+<noscript><div class="wrap" style="padding:24px 20px">Ative o JavaScript para ver a apuração aqui, ou abra o <a href="https://resultados.tse.jus.br/oficial/app/index.html">resultado oficial do TSE</a>.</div></noscript>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="top">
+      <span class="brand">Billie Global BR</span>
+      <span class="top-right">
+        <span class="chip" id="chip"><i class="dot"></i><span id="chip-t">Em breve</span></span>
+        <svg class="star" aria-hidden="true"><use href="#i-star"/></svg>
+      </span>
+    </div>
+
+    <!-- antes das 17h -->
+    <div class="pre" id="pre">
+      <div class="pre-grid">
+        <div>
+          <p class="count-label">Faltam para a apuração começar</p>
+          <div id="countdown"></div>
+          <h1>A apuração começa às 17h do dia 25.</h1>
+          <p class="txt">Quando a votação termina em todo o país, os números do TSE aparecem aqui, sozinhos. É só deixar esta página aberta.</p>
+          <div class="cta-row">
+            <a class="btn btn-wa" href="#" data-wa="group"><svg aria-hidden="true"><use href="#i-wa"/></svg>Grupo de apoiadores</a>
+            <a class="btn btn-ghost" href="#" data-wa="channel">Canal no WhatsApp</a>
+          </div>
+        </div>
+        <div class="big13" aria-hidden="true">13</div>
+      </div>
+    </div>
+
+    <!-- apuração -->
+    <div class="live" id="live" hidden>
+      <div class="live-head">
+        <h1 class="live-title">Apuração do 2º turno</h1>
+        <p class="status" id="status">Votação encerrada. Aguardando o TSE publicar os primeiros números.</p>
+      </div>
+      <div class="verdict" id="verdict" hidden></div>
+
+      <div class="board">
+        <article class="cand lula" id="c-lula" aria-label="Lula, número 13">
+          <div class="photo noimg" id="ph-lula"><img alt="Foto de Lula" referrerpolicy="no-referrer"><div class="ph-fallback" aria-hidden="true"><svg><use href="#i-star"/></svg><b>13</b></div></div>
+          <div class="who">
+            <h2>Lula</h2>
+            <span class="digits" aria-hidden="true"><span>1</span><span>3</span></span>
+            <span class="lead-tag" id="l-tag" hidden>Na frente</span>
+            <span class="party">Luiz Inácio Lula da Silva, PT</span>
+          </div>
+          <div class="pctbox">
+            <div class="pct" id="l-pct">–</div>
+            <div class="votes"><span id="l-votes">–</span> votos</div>
+          </div>
+          <div class="flip" id="flip" hidden>
+            <b id="flip-t"></b>
+            <span id="flip-s"></span>
+            <button class="replay" id="replay" type="button" hidden>Ver a comemoração de novo</button>
+          </div>
+        </article>
+
+        <div class="split" id="split" aria-hidden="true"><i class="sl" id="sl"></i><i class="sf"></i><b class="mid"></b></div>
+
+        <article class="cand flavio" id="c-flavio" aria-label="Flávio Bolsonaro, número 22">
+          <div class="photo noimg" id="ph-flavio"><img alt="Foto de Flávio Bolsonaro" referrerpolicy="no-referrer"><div class="ph-fallback" aria-hidden="true"><b>22</b></div></div>
+          <div class="who">
+            <h2>Flávio Bolsonaro</h2>
+            <span class="digits" aria-hidden="true"><span>2</span><span>2</span></span>
+            <span class="lead-tag" id="f-tag" hidden>Na frente</span>
+            <span class="party">PL</span>
+          </div>
+          <div class="pctbox">
+            <div class="pct" id="f-pct">–</div>
+            <div class="votes"><span id="f-votes">–</span> votos</div>
+          </div>
+        </article>
+      </div>
+
+      <div class="progress">
+        <div class="pbar" aria-hidden="true"><i id="pfill"></i></div>
+        <p><b id="pst">–</b> das seções apuradas <span id="pdet"></span></p>
+      </div>
+      <div class="extras">
+        <div class="tile"><b id="x-vv">–</b><span>votos válidos</span></div>
+        <div class="tile"><b id="x-vb">–</b><span>em branco</span></div>
+        <div class="tile"><b id="x-vn">–</b><span>nulos</span></div>
+        <div class="tile"><b id="x-ab">–</b><span>abstenção</span></div>
+      </div>
+      <p class="net" id="net" hidden>Não consegui falar com o TSE agora. Vou tentar de novo sozinho. Se demorar, abra o <a href="https://resultados.tse.jus.br/oficial/app/index.html" target="_blank" rel="noopener">resultado oficial do TSE</a>.</p>
+      <p class="sr" id="sr" role="status" aria-live="polite"></p>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="light" id="sobre">
+    <div class="wrap">
+      <h2>Sobre a Billie Global BR</h2>
+      <p>A Billie Global BR é uma comunidade brasileira de fãs da Billie Eilish. Esta página é um projeto dos fãs para acompanhar a apuração do 2º turno em tempo real, com os dados abertos do TSE.</p>
+      <p>A comunidade apoia o 13. Entre no grupo ou no canal para acompanhar a noite com a gente.</p>
+      <div class="join">
+        <a class="btn btn-wa" href="#" data-wa="group"><svg aria-hidden="true"><use href="#i-wa"/></svg>Grupo de apoiadores</a>
+        <a class="btn btn-wa" href="#" data-wa="channel"><svg aria-hidden="true"><use href="#i-wa"/></svg>Canal no WhatsApp</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><b>Billie Global BR</b> é uma comunidade de fãs. Esta página não é do TSE nem da campanha do Lula, e a Billie Eilish não tem relação com ela.</p>
+    <p>Os números vêm dos dados abertos do TSE e mudam durante a contagem: enquanto a apuração não chega a 100%, o resultado é parcial. O resultado oficial está no <a href="https://resultados.tse.jus.br/oficial/app/index.html" target="_blank" rel="noopener">site do TSE</a>.</p>
+  </div>
+</footer>
+
+<nav class="dock" aria-label="WhatsApp">
+  <a class="btn btn-wa" href="#" data-wa="group">Grupo no WhatsApp</a>
+  <a class="btn btn-wa" href="#" data-wa="channel">Canal</a>
+</nav>
+<div class="toast" id="toast" role="status"></div>
+
+<div class="burst" id="burst" role="dialog" aria-modal="true" aria-labelledby="burst-title" hidden>
+  <div class="burst-card">
+    <div class="burst-13" aria-hidden="true">13</div>
+    <h2 id="burst-title">Lula virou!</h2>
+    <p id="burst-sub"></p>
+    <button class="btn btn-white" type="button" id="burst-close">Continuar acompanhando</button>
+  </div>
+</div>
+<canvas id="confetti" aria-hidden="true"></canvas>
+
+<script>
+/* =====================================================
+   CONFIGURAÇÃO: edite só esta parte
+   ===================================================== */
+const CONFIG = {
+  // Código do 2º turno (presidente) no TSE. Não precisa mudar.
+  ELEICAO: "6258",
+  // Quando a apuração começa (17h de Brasília, dia 25/10/2026).
+  INICIO_APURACAO: "2026-10-25T17:00:00-03:00",
+  // Troque COLOQUE-AQUI pelo código do seu grupo e do seu canal.
+  WHATSAPP_GROUP: "https://chat.whatsapp.com/COLOQUE-AQUI",
+  WHATSAPP_CHANNEL: "https://whatsapp.com/channel/COLOQUE-AQUI",
+  // Fotos: coloque lula.jpg e flavio.jpg na mesma pasta deste arquivo.
+  // Se não existirem, o site tenta a foto do TSE e, por fim, mostra um cartão com o número.
+  FOTO_LULA: "lula.jpg",
+  FOTO_FLAVIO: "flavio.jpg",
+  // De quantos em quantos segundos consulta o TSE.
+  INTERVALO_SEGUNDOS: 30
+};
+
+/* ===== utilidades ===== */
+const $ = s => document.querySelector(s);
+const REDUCED = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const fmtInt = n => Math.round(n).toLocaleString("pt-BR");
+const fmtPct = n => n.toFixed(2).replace(".", ",") + "%";
+const num = x => {
+  if (typeof x === "number") return x;
+  let s = String(x ?? "").trim();
+  if (s.includes(",")) s = s.replace(/\./g, "").replace(",", ".");
+  const v = parseFloat(s);
+  return Number.isFinite(v) ? v : 0;
+};
+let tt; function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("show");clearTimeout(tt);tt=setTimeout(()=>t.classList.remove("show"),2800)}
+
+/* ===== endereço dos dados do TSE ===== */
+const pad6 = s => String(s).padStart(6, "0");
+const DEFAULT_FEED = `https://resultados.tse.jus.br/oficial/ele2026/${CONFIG.ELEICAO}/dados/br/br-c0001-e${pad6(CONFIG.ELEICAO)}-u.json`;
+function safeFeed(v){
+  try{ const u = new URL(v); if (u.protocol === "https:" && /^(resultados|resultados-sim)\.tse\.jus\.br$/.test(u.hostname)) return u.href; }catch(e){}
+  return null;
+}
+const QS = new URLSearchParams(location.search);
+const DEMO = QS.get("demo");                    // "1" ou "2": teste com números fictícios
+const FEED_OVERRIDE = safeFeed(QS.get("feed") || "");
+const FEED = FEED_OVERRIDE || DEFAULT_FEED;
+const FORCE = !!(DEMO || FEED_OVERRIDE);        // testes começam na hora
+const START = new Date(CONFIG.INICIO_APURACAO).getTime();
+
+/* ===== relógio certo (corrige relógio errado do aparelho) ===== */
+let skew = 0;
+const now = () => Date.now() + skew;
+async function syncClock(){
+  try{
+    const r = await fetch(location.href.split("#")[0].split("?")[0], {method:"HEAD", cache:"no-store"});
+    const d = r.headers.get("date");
+    if (d){ const off = new Date(d).getTime() - Date.now(); if (Math.abs(off) < 864e5) skew = off; }
+  }catch(e){}
+}
+
+/* ===== estado ===== */
+const S = { started:false, leader:null, final:false, winner:null, winnerShown:false, lastBurst:0, hasData:false, sqL:null, sqF:null, srStep:-1, srLeader:null };
+
+/* ===== contagem regressiva ===== */
+function renderCount(ms){
+  let s = Math.max(0, Math.floor(ms/1000));
+  const d = Math.floor(s/86400); s %= 86400; const h = Math.floor(s/3600); s %= 3600; const m = Math.floor(s/60); s %= 60;
+  const box = (v,l) => `<div><b>${String(v).padStart(2,"0")}</b><span>${l}</span></div>`;
+  $("#countdown").innerHTML = `<div class="count">${box(d,"dias")}${box(h,"horas")}${box(m,"min")}${box(s,"seg")}</div>`;
+}
+function setChip(kind){
+  const c = $("#chip"); c.className = "chip " + kind;
+  $("#chip-t").textContent = {soon:"Em breve", wait:"Aguardando o TSE", live:"Ao vivo", done:"Apuração encerrada"}[kind];
+}
+function tick(){
+  const t = now();
+  if (!S.started && (FORCE || t >= START)){
+    S.started = true;
+    $("#pre").hidden = true; $("#live").hidden = false; setChip("wait");
+    if (DEMO) runDemo(); else schedule(0);
+  }
+  if (!S.started) renderCount(START - t);
+}
+
+/* ===== leitura dos dados do TSE ===== */
+function collect(o, out = []){
+  if (Array.isArray(o)) o.forEach(x => collect(x, out));
+  else if (o && typeof o === "object"){
+    if ("vap" in o && "n" in o) out.push(o);
+    else Object.values(o).forEach(x => collect(x, out));
+  }
+  return out;
+}
+const byNum = (c, n) => c.find(x => String(x.n).trim() === n);
+const nameOf = x => String(x.nm || x.nmu || "");
+
+function applyData(j){
+  const c = collect(j);
+  const L = byNum(c,"13") || c.find(x => /LULA/i.test(nameOf(x)));
+  const F = byNum(c,"22") || c.find(x => /BOLSONARO/i.test(nameOf(x)));
+  if (!L || !F) throw new Error("Não achei Lula e Flávio no arquivo do TSE.");
+
+  const lv = num(L.vap), fv = num(F.vap), tot = lv + fv;
+  const lp = L.pvap != null && tot > 0 ? num(L.pvap) : (tot ? lv/tot*100 : 0);
+  const fp = F.pvap != null && tot > 0 ? num(F.pvap) : (tot ? fv/tot*100 : 0);
+  const leader = tot === 0 ? "none" : lv > fv ? "lula" : fv > lv ? "flavio" : "tie";
+  const sec = j.s || {}, vot = j.v || {}, ele = j.e || {};
+  const final = j.tf === "s" || j.and === "f";
+  let winner = null;
+  if (L.e === "s" && lv >= fv) winner = "lula";
+  else if (F.e === "s" && fv >= lv) winner = "flavio";
+
+  const sim = j.f === "s" || !!DEMO;
+  $("#simbar").hidden = !sim; document.body.classList.toggle("sim", sim);
+  if (j.f === "s" && !DEMO) $("#simbar").textContent = "Dados de simulação do TSE: não são o resultado da eleição.";
+
+  const prevLeader = S.leader;
+  S.hasData = true; S.final = final; S.winner = winner; S.leader = leader;
+  S.sqL = L.sqcand; S.sqF = F.sqcand;
+  tryTsePhotos();
+
+  // placar
+  setNum($("#l-pct"), lp, fmtPct); setNum($("#f-pct"), fp, fmtPct);
+  setNum($("#l-votes"), lv, fmtInt); setNum($("#f-votes"), fv, fmtInt);
+  $("#sl").style.flexBasis = (tot ? lv/tot*100 : 50) + "%";
+  $("#c-lula").classList.toggle("leader", leader === "lula");
+  $("#c-flavio").classList.toggle("leader", leader === "flavio");
+  $("#l-tag").hidden = leader !== "lula"; $("#f-tag").hidden = leader !== "flavio";
+  renderFlip({lv,fv,lp,fp,tot,leader,final,winner});
+
+  // seções e extras
+  const pst = sec.pstn != null ? num(sec.pstn) : num(sec.pst);
+  $("#pst").textContent = fmtPct(pst);
+  $("#pfill").style.width = Math.min(100, pst) + "%";
+  $("#pdet").textContent = sec.ts ? `(${fmtInt(num(sec.st))} de ${fmtInt(num(sec.ts))})` : "";
+  $("#x-vv").textContent = vot.vv != null ? fmtInt(num(vot.vv)) : "–";
+  $("#x-vb").textContent = vot.vb != null ? fmtInt(num(vot.vb)) + (vot.pvb ? ` (${vot.pvb}%)` : "") : "–";
+  $("#x-vn").textContent = vot.tvn != null ? fmtInt(num(vot.tvn)) + (vot.ptvn ? ` (${vot.ptvn}%)` : "") : "–";
+  $("#x-ab").textContent = ele.a != null ? fmtInt(num(ele.a)) + (ele.pa ? ` (${ele.pa}%)` : "") : "–";
+
+  // textos de estado
+  setChip(final ? "done" : "live");
+  $("#status").textContent = final
+    ? "Apuração encerrada. Este é o resultado final divulgado pelo TSE."
+    : (tot === 0 ? "A contagem começou. Aguardando as primeiras urnas." : "Resultado parcial: o TSE ainda está contando os votos. Esta página atualiza sozinha.");
+  const v = $("#verdict");
+  if (winner){
+    const who = winner === "lula" ? "Lula (PT)" : "Flávio Bolsonaro (PL)";
+    v.className = "verdict " + winner;
+    v.textContent = `O TSE confirmou: ${who} é o presidente eleito.` + (sim ? " (simulação)" : "") + (winner === "flavio" ? " Obrigado a quem acompanhou a apuração com a gente." : "");
+    v.hidden = false;
+  } else v.hidden = true;
+  const hg = j.hg ? ` | TSE ${j.hg}` : "";
+  document.title = tot ? `Lula ${fmtPct(lp)} x Flávio ${fmtPct(fp)}${hg} | Billie Global BR` : "Apuração ao vivo | Billie Global BR";
+
+  // texto para leitor de tela (só quando muda algo importante)
+  const step = Math.floor(pst/10);
+  if (leader !== S.srLeader || step !== S.srStep){
+    S.srLeader = leader; S.srStep = step;
+    $("#sr").textContent = `Apuração em ${fmtPct(pst)}. ` + (leader==="lula" ? "Lula na frente." : leader==="flavio" ? "Flávio Bolsonaro na frente." : "") + ` Lula ${fmtPct(lp)}, Flávio Bolsonaro ${fmtPct(fp)}.`;
+  }
+
+  // comemorações
+  if (winner === "lula" && !S.winnerShown){
+    S.winnerShown = true;
+    if (DEMO || !seenElected()){ markElected(); showBurst("Lula eleito!", sim ? "Simulação: nada disso é o resultado real." : "O TSE confirmou o resultado do 2º turno."); }
+  } else if (!winner && prevLeader === "flavio" && leader === "lula" && Date.now() - S.lastBurst > 120000){
+    S.lastBurst = Date.now();
+    showBurst("Lula virou!", `Lula passou à frente com ${fmtPct(pst)} das seções apuradas. É um resultado parcial: a contagem continua.` + (sim ? " (simulação)" : ""));
+  }
+  $("#replay").hidden = !(leader === "lula" || winner === "lula");
+}
+function seenElected(){ try{ return sessionStorage.getItem("bgbr_eleito") === "1"; }catch(e){ return false; } }
+function markElected(){ try{ sessionStorage.setItem("bgbr_eleito","1"); }catch(e){} }
+
+function renderFlip(d){
+  const el = $("#flip"), t = $("#flip-t"), s = $("#flip-s");
+  if (!d.tot){ el.hidden = true; return; }
+  const pts = Math.abs(d.fp - d.lp).toFixed(2).replace(".", ",") + " pontos percentuais";
+  const dv = fmtInt(Math.abs(d.fv - d.lv)) + " votos";
+  el.hidden = false;
+  if (d.final){
+    el.className = "flip " + (d.leader === "lula" ? "ahead" : "");
+    t.textContent = "Resultado final";
+    s.textContent = d.leader === "lula" ? `Lula terminou na frente por ${pts} (${dv}).` : d.leader === "flavio" ? `Lula terminou ${pts} atrás (${dv}).` : "Empate.";
+  } else if (d.leader === "flavio"){
+    el.className = "flip"; t.textContent = `Faltam ${pts} para a virada`; s.textContent = `${dv} de diferença`;
+  } else if (d.leader === "lula"){
+    el.className = "flip ahead"; t.textContent = `Lula na frente por ${pts}`; s.textContent = `${dv} de vantagem`;
+  } else { el.className = "flip"; t.textContent = "Empatados"; s.textContent = "Cada urna conta."; }
+}
+
+/* números que "rolam" suavemente */
+function setNum(el, to, fmt){
+  const from = el._v; el._v = to;
+  cancelAnimationFrame(el._r);
+  if (from == null || REDUCED || from === to){ el.textContent = fmt(to); return; }
+  const t0 = performance.now(), dur = 700;
+  const step = t => { const k = Math.min((t - t0)/dur, 1), e = 1 - Math.pow(1-k, 3); el.textContent = fmt(from + (to-from)*e); if (k < 1) el._r = requestAnimationFrame(step); };
+  el._r = requestAnimationFrame(step);
+}
+
+/* ===== fotos ===== */
+function loadPhoto(box, srcs){
+  const img = box.querySelector("img"); let i = 0;
+  const next = () => { if (i >= srcs.length){ box.classList.add("noimg"); return; } img.src = srcs[i++]; };
+  img.onerror = next; img.onload = () => box.classList.remove("noimg");
+  next();
+}
+const tsePhoto = (e, sq) => `https://resultados.tse.jus.br/oficial/ele2026/${e}/fotos/br/${sq}.jpeg`;
+let triedTse = false;
+function tryTsePhotos(){
+  if (triedTse || !S.sqL) return; triedTse = true;
+  [["#ph-lula", S.sqL, CONFIG.FOTO_LULA], ["#ph-flavio", S.sqF, CONFIG.FOTO_FLAVIO]].forEach(([sel, sq, local]) => {
+    const box = $(sel);
+    if (box.classList.contains("noimg") && sq) loadPhoto(box, [tsePhoto(CONFIG.ELEICAO, sq), tsePhoto("6257", sq)]);
+  });
+}
+
+/* ===== consulta ao TSE ===== */
+let pollTimer = 0, polling = false, misses = 0, errs = 0, lastOk = 0;
+function schedule(sec){ clearTimeout(pollTimer); pollTimer = setTimeout(poll, (sec + Math.random()*5) * 1000); }
+function setNet(ok, waiting){
+  const n = $("#net");
+  if (ok){ n.hidden = true; return; }
+  if (waiting && !S.hasData){ n.hidden = true; return; }
+  n.hidden = false;
+}
+async function poll(){
+  if (polling) return; polling = true;
+  let next = CONFIG.INTERVALO_SEGUNDOS;
+  try{
+    const r = await fetch(FEED, {cache:"no-cache"});
+    if (r.status === 404){ misses++; setNet(false, true); next = Math.min(60, 20 + misses*10); }
+    else if (!r.ok) throw new Error("HTTP " + r.status);
+    else {
+      const txt = await r.text();
+      const j = JSON.parse(txt.replace(/^﻿/, ""));
+      misses = 0; errs = 0; applyData(j); setNet(true); lastOk = Date.now();
+      if (S.final) next = 300;
+    }
+  }catch(e){ errs++; console.warn("[apuração]", e); setNet(false, false); next = Math.min(60, 20 + errs*10); }
+  polling = false; schedule(next);
+}
+document.addEventListener("visibilitychange", () => {
+  if (document.visibilityState === "visible" && S.started && !DEMO && !polling && Date.now() - lastOk > 25000) schedule(0);
+});
+
+/* ===== comemoração ===== */
+const Confetti = (() => {
+  const cv = $("#confetti"), ctx = cv.getContext("2d");
+  let W = 0, H = 0, parts = [], raf = 0, last = 0;
+  const COLORS = ["#ffffff","#ffffff","#ffd9dc","#ff6b76","#e01e2d","#fff0f1","#ffb3b9"];
+  function size(){ const d = Math.min(devicePixelRatio || 1, 2); W = innerWidth; H = innerHeight; cv.width = W*d; cv.height = H*d; cv.style.width = W+"px"; cv.style.height = H+"px"; ctx.setTransform(d,0,0,d,0,0); }
+  addEventListener("resize", size); size();
+  const rnd = (a,b) => a + Math.random()*(b-a);
+  function add(o){ if (parts.length < 450) parts.push(Object.assign({rot:rnd(0,6.28), vr:rnd(-.3,.3), s:rnd(6,14), c:COLORS[(Math.random()*COLORS.length)|0], sh:["rect","rect","circle","star"][(Math.random()*4)|0], a:1, t:0}, o)); }
+  function shoot(x, y, ang, n, power){ for (let i=0;i<n;i++){ const a = ang + rnd(-.45,.45), v = power*rnd(.55,1.15); add({x,y,vx:Math.cos(a)*v,vy:Math.sin(a)*v}); } }
+  function rain(n){ for (let i=0;i<n;i++) add({x:rnd(0,W),y:-12,vx:rnd(-1,1),vy:rnd(1.5,4)}); }
+  function star(r){ ctx.beginPath(); for (let i=0;i<10;i++){ const a = -Math.PI/2 + i*Math.PI/5, rr = i%2 ? r*.42 : r; ctx.lineTo(Math.cos(a)*rr, Math.sin(a)*rr); } ctx.closePath(); ctx.fill(); }
+  function frame(ts){
+    const dt = Math.min((ts - last)/16.67 || 1, 3); last = ts;
+    ctx.clearRect(0,0,W,H);
+    parts = parts.filter(p => p.y < H + 30 && p.a > .03);
+    for (const p of parts){
+      p.vy += .16*dt; p.vx *= Math.pow(.992, dt); p.vy *= Math.pow(.995, dt);
+      p.x += p.vx*dt; p.y += p.vy*dt; p.rot += p.vr*dt; p.t += dt;
+      if (p.t > 160) p.a -= .02*dt;
+      ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.rot); ctx.globalAlpha = Math.max(0,p.a); ctx.fillStyle = p.c;
+      if (p.sh === "rect"){ ctx.scale(1, Math.cos(p.t*.15 + p.rot)); ctx.fillRect(-p.s/2, -p.s/4, p.s, p.s/2); }
+      else if (p.sh === "circle"){ ctx.beginPath(); ctx.arc(0,0,p.s/3,0,6.283); ctx.fill(); }
+      else star(p.s*.7);
+      ctx.restore();
+    }
+    if (parts.length) raf = requestAnimationFrame(frame); else { raf = 0; ctx.clearRect(0,0,W,H); }
+  }
+  function start(){ if (!raf){ last = performance.now(); raf = requestAnimationFrame(frame); } }
+  function celebrate(){
+    if (REDUCED) return;
+    [0,350,700,1100].forEach(d => setTimeout(() => { shoot(0, H*.85, -Math.PI/3, 70, 15); shoot(W, H*.85, -2*Math.PI/3, 70, 15); start(); }, d));
+    let n = 0; const iv = setInterval(() => { rain(8); start(); if (++n > 22) clearInterval(iv); }, 220);
+  }
+  return {celebrate};
+})();
+
+let lastFocus = null, burstTimer = 0;
+function showBurst(title, sub){
+  lastFocus = document.activeElement;
+  $("#burst-title").textContent = title; $("#burst-sub").textContent = sub;
+  $("#burst").hidden = false; $("#burst-close").focus();
+  Confetti.celebrate();
+  clearTimeout(burstTimer); burstTimer = setTimeout(hideBurst, 15000);
+}
+function hideBurst(){ $("#burst").hidden = true; clearTimeout(burstTimer); if (lastFocus && lastFocus.focus) lastFocus.focus(); }
+$("#burst-close").addEventListener("click", hideBurst);
+addEventListener("keydown", e => { if (e.key === "Escape" && !$("#burst").hidden) hideBurst(); });
+$("#replay").addEventListener("click", () => showBurst(S.winner === "lula" ? "Lula eleito!" : "Lula na frente!", S.winner === "lula" ? "O TSE confirmou o resultado do 2º turno." : "Resultado parcial: a contagem continua."));
+
+/* ===== modo de teste (?demo=1 ou ?demo=2) com números FICTÍCIOS ===== */
+function demoFrame(p, mode){
+  const TS = 472000, valid = Math.round(118400000*p);
+  const share = mode === "2" ? .405 + .065*Math.sqrt(p) : .41 + .105*Math.sqrt(p);
+  const lv = Math.round(valid*share), fv = valid - lv;
+  const f2 = x => x.toFixed(2).replace(".", ",");
+  const final = p >= 1, lulaWins = lv > fv, st = Math.round(TS*p);
+  const cand = (n,nm,v,win) => ({agr:[{n,par:[{cand:[{n,nm,sqcand:"",vap:String(v),pvap:f2(valid ? v/valid*100 : 0),e:final&&win?"s":"n",st:final?(win?"Eleito":"Não eleito"):""}]}]}]});
+  return {ele:CONFIG.ELEICAO,t:2,f:"s",tf:final?"s":"n",and:final?"f":"p",hg:new Date().toLocaleTimeString("pt-BR"),
+    s:{ts:String(TS),st:String(st),pst:f2(st/TS*100)},
+    v:{vv:String(valid),vb:String(Math.round(valid*.0185)),pvb:"1,84",tvn:String(Math.round(valid*.0307)),ptvn:"2,93"},
+    e:{te:"158745502",a:"33469244",pa:"21,08"},
+    carg:[{cd:"1",nmn:"Presidente",agr:[cand("13","LULA",lv,lulaWins).agr[0],cand("22","FLAVIO BOLSONARO",fv,!lulaWins).agr[0]]}]};
+}
+function runDemo(){
+  const dur = Math.min(120, Math.max(5, +QS.get("dur") || 40)) * 1000, t0 = Date.now();
+  const stepFn = () => { const p = Math.min(1, (Date.now() - t0)/dur); applyData(demoFrame(p, DEMO)); if (p < 1) setTimeout(stepFn, 1200); };
+  stepFn();
+}
+
+/* ===== botões do WhatsApp ===== */
+document.querySelectorAll("[data-wa]").forEach(a => {
+  const url = {group:CONFIG.WHATSAPP_GROUP, channel:CONFIG.WHATSAPP_CHANNEL}[a.dataset.wa];
+  if (url.includes("COLOQUE-AQUI")) a.addEventListener("click", e => { e.preventDefault(); toast("Edite os links do WhatsApp no começo do script do arquivo."); });
+  else { a.href = url; a.target = "_blank"; a.rel = "noopener"; }
+});
+
+/* ===== começa ===== */
+loadPhoto($("#ph-lula"), [CONFIG.FOTO_LULA]);
+loadPhoto($("#ph-flavio"), [CONFIG.FOTO_FLAVIO]);
+if (DEMO){ document.body.classList.add("sim"); $("#simbar").hidden = false; }
+syncClock();
+setInterval(tick, 250); tick();
+</script>
+</body>
+</html>
